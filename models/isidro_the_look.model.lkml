@@ -106,64 +106,12 @@ explore: incremental_pdts_test {}
 
 explore: ints {}
 
-explore: inventory_items {
-  #fields: [ALL_FIELDS*, -inventory_items.test_using_a_measure, -inventory_items.avg_test, -products.total_test]
-  join: products {
-    type: left_outer
-    sql_on: ${inventory_items.product_id} = ${products.id} ;;
-    relationship: many_to_one
-  }
-#<<<<<<< HEAD
-  join: order_items {
-    type: left_outer
-    sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
-    relationship: many_to_one
-  }
-#=======
-#>>>>>>> branch 'master' of git@github.com:hijuancarlos/gcpm2210_thelook-.git
-}
-
-explore: orders {
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-
-
-}
 
 
 
+explore: orders {}
 
-
-
-explore: order_items {
-  join: orders {
-    type: left_outer
-    sql_on: ${order_items.order_id} = ${orders.id} ;;
-    relationship: many_to_one
-  }
-
-  join: inventory_items {
-    type: left_outer
-    sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
-    relationship: many_to_one
-  }
-
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-
-  join: products {
-    type: left_outer
-    sql_on: ${inventory_items.product_id} = ${products.id} ;;
-    relationship: many_to_one
-  }
-
-}
+explore: order_items {}
 
 explore: pegdates {}
 
@@ -257,3 +205,27 @@ datagroup: test_dt_users_2 {
 }
 
 explore: dt_users {}
+
+explore: transactions {
+  label: "Transactions Edher"
+
+  sql_always_where: ${transactions.sales_amount}>0 AND
+                    ${transactions.currency} != "USD\r" AND
+                    ${transactions.currency} != "INR" AND
+                    ${transactions.order_year} >2017;;
+
+  join: customers {
+    foreign_key: customer_code
+    relationship: many_to_one
+  }
+
+  join: markets {
+    foreign_key: market_code
+    relationship: many_to_one
+  }
+
+  join: products {
+    foreign_key: product_code
+    relationship: many_to_one
+  }
+}
