@@ -11,7 +11,7 @@ datagroup: sales_gcp_isidro_default_datagroup {
 persist_with: sales_gcp_isidro_default_datagroup
 
 explore: transactions {
-  label: "Transactions Edher"
+  label: "Transactions"
 
   sql_always_where: ${transactions.sales_amount}>0 AND
                     ${transactions.currency} != "USD\r" AND
