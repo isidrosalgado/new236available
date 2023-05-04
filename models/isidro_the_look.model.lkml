@@ -207,7 +207,7 @@ datagroup: test_dt_users_2 {
 explore: dt_users {}
 
 explore: transactions {
-  label: "Transactions Edher"
+  label: "Transactions"
 
   sql_always_where: ${transactions.sales_amount}>0 AND
                     ${transactions.currency} != "USD\r" AND
