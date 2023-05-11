@@ -66,4 +66,192 @@ view: orders {
       ten_million_orders.count
     ]
   }
+
+#testsssssssssssssssssssssconcat
+
+
+  dimension: week_test {
+    sql: WEEK(${TABLE}.created_at);;
+    group_label: "Date Date"
+    group_item_label: "Week Test"
+  }
+  dimension: day_test {
+    hidden: yes
+    sql: DAY(${TABLE}.created_at);;
+    group_label: "Date Date"
+    group_item_label: "Week Test"
+  }
+
+  dimension_group: date {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      month_name,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}.created_at ;;
+  }
+
+
+  dimension: test {
+    type: string
+    sql: CONCAT(CAST(${date_month_name} AS CHAR(3)), ' ', CAST(YEAR(${TABLE}.created_at) AS CHAR)) ;;
+  }
+
+
+  # dimension: test {
+  #  type: string
+  # sql: CONCAT(CAST(${date_month_name} AS CHAR),' || Wk- ', CAST(ROUND((CONVERT(DAY(${TABLE}.created_at),DECIMAL)+6)/7) AS CHAR)) ;;
+  #}
+
+#testssssssssssssssssAlankritaconcat
+
+#testssssssssssssssssAkhmerovliquid
+
+  dimension: prior_month_label {
+    label: "Prior Month"
+    type: string
+    sql:{% assign yr = 'now' | date: '%Y' %} {% assign month = 'now' | date: '%m' %}
+
+      {% assign prior_month = 'now' | date: '%m' | minus:1 %}
+
+      {% assign prior_date = yr | append: '-' | append: prior_month | append: '-01' %}
+
+      {{ prior_date | date: '%b %Y' }};;
+  }
+
+
+  dimension: test_date_format1 {
+    sql: '2022-01-01' ;;
+    html: {{rendered_value | date: "%b %d, %Y"}} ;;
+  }
+
+  dimension: test_date_format2 {
+    sql: '2022-1-01' ;;
+    html: {{rendered_value | date: "%b %d, %Y"}} ;;
+  }
+
+
+#testssssssssssssssssAkhmerovliquid
+
+#testsssssssssssssssssssZianWang
+  dimension: time_stamp{
+    sql:  ${TABLE}.created_at ;;
+
+  }
+
+  dimension: test_date {
+    sql: ${TABLE}.created_at ;;
+    html: {{rendered_value |date:"%s"}};;
+
+  }
+#testsssssssssssssssssssZianWang
+
+  parameter: date_start {
+    type: date
+    description: "Use this field to select a date to filter results by."
+  }
+
+  parameter: date_end {
+    type: date
+    description: "Use this field to select a date to filter results by."
+  }
+
+  dimension_group: orders{
+    type: time
+    timeframes: [
+      raw,
+      date,
+      hour,
+      minute,
+      second
+    ]
+    sql: ${TABLE}.created_at ;;
+  }
+  #test
+
+  dimension: max_create_date {
+    type: string
+    sql: (SELECT MAX(created_at) FROM  demo_db.orders) ;;
+  }
+
+
+#test_yes_no.............................
+
+  dimension: status_yes_no {
+    label: "yes no"
+    type: yesno
+    sql:${TABLE}.status IN ('pending', 'complete') ;;
+  }
+
+  measure: count_yes_no {
+    type: sum_distinct
+    sql: ${status_yes_no};;
+    value_format: "$#.00;($#.00)"
+
+  }
+
+  measure:count_yes_no_percent {
+    type: percent_of_total
+    sql: ${status_yes_no};;
+    value_format: "0.000"
+  }
+
+  #test_yes_no.............................
+
+  measure: Orders_sum {
+    type: sum
+    sql: ${user_id} ;;
+  }
+
+  dimension: start_date {
+    hidden: yes
+    type: date
+    sql: {% date_start day %} ;;
+  }
+
+  dimension: end_date {
+    type: date
+    sql: {% date_end day %} ;;
+  }
+
+  measure: count_of_cancellations {
+    type: number
+    sql:COUNT(distinct ${id}) ;;
+    drill_fields: [id,user_id,status]
+    #sql_distinct_key: ${user_id} ;;
+  }
+  #bug testing
+  measure: negative_count {
+    type: number
+    sql: ${count_of_cancellations}*-1 ;;
+  }
+
+  measure: negative_1 {
+    type: number
+    sql: ${count_of_cancellations}*-1+1;;
+  }
+
+  measure: test_cunt {
+    type: count_distinct
+    sql: ${id} ;;
+  }
+
+  measure: test_avg {
+    type: number
+    sql: 1.0 * ${test_cunt}/${Orders_sum};;
+  }
+
+  filter: date_filter {
+    type: date
+  }
+
+
+
 }
