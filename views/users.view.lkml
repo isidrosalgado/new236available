@@ -17,24 +17,11 @@ view: users {
   # A dimension is a groupable field that can be used to filter query results.
   # This dimension will be called "Age" in Explore.
 
-  dimension: age {
-    type: number
-    sql: ${TABLE}.age ;;
-  }
 
   # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
   # measures for this dimension, but you can also add measures of many different aggregates.
   # Click on the type parameter to see all the options in the Quick Help panel on the right.
 
-  measure: total_age {
-    type: sum
-    sql: ${age} ;;
-  }
-
-  measure: total_revenue {
-    type: average
-    sql: ${age} ;;
-  }
 
   dimension: city {
     type: string
@@ -94,10 +81,35 @@ view: users {
     sql: ${TABLE}.zip ;;
   }
 
+
+  measure: total_revenue {
+    type: average
+    sql: ${age} ;;
+  }
+
   measure: customer_revenue {
     type: count
     drill_fields: [detail*]
     value_format:"$#.00;($#.00)"
+  }
+
+  dimension: age {
+    type: number
+    sql: ${TABLE}.age ;;
+  }
+
+
+  measure: total {
+    type: sum
+    sql: ${age} ;;
+    value_format:"$#.00;($#.00)"
+  }
+
+
+  measure: percent_of_total_revenue {
+    type: number
+    sql: ${customer_revenue} /  ${total} ;;
+    value_format_name: percent_0
   }
 
   # ----- Sets of fields for drilling ------
