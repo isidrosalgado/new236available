@@ -104,13 +104,48 @@ view: users {
     sql: ${age} ;;
     value_format:"$#.00;($#.00)"
   }
-
+  ###########################decimales
+  parameter: metric_selector {
+    type: string
+    description: "Used as a filter to switch between KPI's"
+    allowed_value: {
+      label: "3"
+      value: "three"
+    }
+    allowed_value: {
+      label: "4"
+      value: "four"
+    }
+    allowed_value: {
+      label: "12"
+      value: "twelve"
+    }
+  }
 
   measure: percent_of_total_revenue {
+    label_from_parameter: metric_selector
+    description: "Value corresponding to KPI in Metric Selector"
     type: number
     sql: ${customer_revenue} /  ${total} ;;
     value_format_name: percent_0
+
+
+
+    html:
+    {% if metric_selector._parameter_value == "'three'" %}
+    {{ rendered_value | precision:3 }}
+    {% elsif metric_selector._parameter_value == "'four'" %}
+    {{ rendered_value | precision:4 }}
+    {% elsif metric_selector._parameter_value == "'twelve'" %}
+    {{ rendered_value | precision:12 }}
+    {% else %}
+    ${{ rendered_value }}
+    {% endif %}
+    ;;
+
   }
+
+  #################decimales
 
   # ----- Sets of fields for drilling ------
   set: detail {
