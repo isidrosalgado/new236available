@@ -210,16 +210,9 @@ view: orders {
     sql: ${user_id} ;;
   }
 
-  dimension: start_date {
-    hidden: yes
-    type: date
-    sql: {% date_start day %} ;;
-  }
 
-  dimension: end_date {
-    type: date
-    sql: {% date_end day %} ;;
-  }
+
+
 
   measure: count_of_cancellations {
     type: number

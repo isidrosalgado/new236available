@@ -28,19 +28,7 @@ explore: test_j {}
 
 explore: account {}
 
-explore: billion_orders {
-  join: orders {
-    type: left_outer
-    sql_on: ${billion_orders.order_id} = ${orders.id} ;;
-    relationship: many_to_one
-  }
 
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
 
 explore: connection_reg_r3 {}
 
@@ -56,51 +44,12 @@ explore: events {
   }
 }
 
-explore: fakeorders {
-  join: orders {
-    type: left_outer
-    sql_on: ${fakeorders.order_id} = ${orders.id} ;;
-    relationship: many_to_one
-  }
-
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
 
 explore: flights {}
 
 explore: human {}
 
-explore: hundred_million_orders {
-  join: orders {
-    type: left_outer
-    sql_on: ${hundred_million_orders.order_id} = ${orders.id} ;;
-    relationship: many_to_one
-  }
 
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
-
-explore: hundred_million_orders_wide {
-  join: orders {
-    type: left_outer
-    sql_on: ${hundred_million_orders_wide.order_id} = ${orders.id} ;;
-    relationship: many_to_one
-  }
-
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
 
 explore: incremental_pdts_test {}
 
@@ -149,20 +98,6 @@ explore: sindhu {
   }
 }
 
-explore: ten_million_orders {
-  join: orders {
-    type: left_outer
-    sql_on: ${ten_million_orders.order_id} = ${orders.id} ;;
-    relationship: many_to_one
-  }
-
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
-
 explore: test {}
 
 explore: users {}
@@ -176,14 +111,7 @@ explore: user_data {
 }
 
 
-explore: order_items_test {
-  view_name: order_items
-  join: orders {
-    type: left_outer
-    sql_on: ${order_items.order_id} = ${orders.id} ;;
-    relationship: many_to_one
-  }
-}
+
 
 explore: chi_square_example_dt {}
 

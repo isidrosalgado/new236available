@@ -29,6 +29,12 @@ view: salary {
     type: sum
     sql: ${salary} ;;
   }
+####################test liquiddecimal places
+
+
+
+####################test liquiddecimal places
+
 
   measure: average_salary {
     type: average
@@ -39,4 +45,5 @@ view: salary {
     type: count
     drill_fields: [dept.dept_id, dept.dept_name]
   }
+
 }
