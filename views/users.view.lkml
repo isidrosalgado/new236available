@@ -31,7 +31,7 @@ view: users {
     sql: ${age} ;;
   }
 
-  measure: average_age {
+  measure: total_revenue {
     type: average
     sql: ${age} ;;
   }
@@ -94,7 +94,7 @@ view: users {
     sql: ${TABLE}.zip ;;
   }
 
-  measure: count {
+  measure: customer_revenue {
     type: count
     drill_fields: [detail*]
     value_format:"$#.00;($#.00)"
