@@ -127,7 +127,7 @@ view: users {
     description: "Value corresponding to KPI in Metric Selector"
     type: number
     sql: ${customer_revenue} /  ${total} ;;
-    value_format_name: percent_0
+    #value_format_name: percent_12
 
 
 
