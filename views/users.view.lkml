@@ -139,7 +139,7 @@ view: users {
 ##}
 
 #################decimales intento con case when
-#################decimales intento seleccionando diferentes measures
+#################decimales intento seleccionando diferentes measures con case when tambien
   parameter: decimal_selector {
     type: string
     allowed_value: {
@@ -285,7 +285,7 @@ view: users {
 
     END;;
   }
-#################decimales intento seleccionando diferentes measures
+#################decimales intento seleccionando diferentes measures con case when tambien
 
   # ----- Sets of fields for drilling ------
   set: detail {
