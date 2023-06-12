@@ -16,7 +16,6 @@ persist_with: isidro_the_look_default_datagroup
 
 #<<<<<<< HEAD
 
-
 explore: dt_orders{}
 #=======
 #explore: dt_orders{}
@@ -28,22 +27,15 @@ explore: test_j {}
 
 explore: account {}
 
-
-
 explore: connection_reg_r3 {}
 
 explore: dept {}
 
 explore: employees {}
 
-explore: events {
-  join: users {
-    type: left_outer
-    sql_on: ${events.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
 
+
+explore: users {}
 
 explore: flights {}
 
@@ -80,36 +72,13 @@ explore: salary {
   }
 }
 
-explore: saralooker {
-  join: users {
-    type: left_outer
-    sql_on: ${saralooker.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
+
 
 explore: schema_migrations {}
 
-explore: sindhu {
-  join: users {
-    type: left_outer
-    sql_on: ${sindhu.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
+
 
 explore: test {}
-
-explore: users {}
-
-explore: user_data {
-  join: users {
-    type: left_outer
-    sql_on: ${user_data.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
-
 
 
 
