@@ -285,7 +285,7 @@ view: users {
 
     END;;
   }
-#################decimales intento seleccionando diferentes measures con case when tambien
+#################decimales intento con "value" seleccionando diferentes measures con case when tambien
 
   # ----- Sets of fields for drilling ------
   set: detail {
