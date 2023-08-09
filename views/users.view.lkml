@@ -60,6 +60,10 @@ view: users {
   dimension: first_name {
     type: string
     sql: ${TABLE}.first_name ;;
+    html: <div style="border: 2px solid #your-border-color; border-radius: your-border-radius;">
+    Your Content Here
+    </div>
+  }
   }
 
   dimension: gender {
@@ -97,17 +101,7 @@ view: users {
 
 
 
-  measure: customer_revenue {
-    type: count
-    drill_fields: [detail*]
-    value_format: "$#.00;($#.00)"
-  }
 
-  measure: total {
-    type: sum
-    sql: ${age} ;;
-    value_format: "$#.00;($#.00)"
-  }
   #################decimales intento con case when
 
 ##parameter: decimal_selector {
@@ -140,6 +134,18 @@ view: users {
 
 #################decimales intento con case when
 #################decimales intento seleccionando diferentes measures con case when tambien
+  measure: customer_revenue {
+    type: count
+    drill_fields: [detail*]
+    value_format: "$#.00;($#.00)"
+  }
+
+  measure: total {
+    type: sum
+    sql: ${age} ;;
+    value_format: "$#.00;($#.00)"
+  }
+
   parameter: decimal_selector {
     type: string
     allowed_value: {
@@ -195,73 +201,75 @@ view: users {
 
   measure: percent_of_total_revenue_decimal_1 {
     type: number
-    sql: ${customer_revenue} / ${total};;
+    sql: ${total} / ${customer_revenue}  ;;
     hidden: yes
   }
 
   measure: percent_of_total_revenue_decimal_2 {
     type: number
-    sql: ${customer_revenue} / ${total};;
+    sql: ${total} / ${customer_revenue}  ;;
     hidden: yes
+    value_format: "$#.00;($#.00)"
   }
 
   measure: percent_of_total_revenue_decimal_3 {
     type: number
-    sql: ${customer_revenue} / ${total};;
+    sql: ${total} / ${customer_revenue}  ;;
     hidden: yes
   }
 
   measure: percent_of_total_revenue_decimal_4 {
     type: number
-    sql: ${customer_revenue} / ${total};;
+    sql: ${total} / ${customer_revenue}  ;;
     hidden: yes
   }
 
   measure: percent_of_total_revenue_decimal_5 {
     type: number
-    sql: ${customer_revenue} / ${total};;
+    sql: ${total} / ${customer_revenue}  ;;
     hidden: yes
   }
 
   measure: percent_of_total_revenue_decimal_6 {
     type: number
-    sql: ${customer_revenue} / ${total};;
+    sql: ${total} / ${customer_revenue}  ;;
     hidden: yes
+
   }
 
   measure: percent_of_total_revenue_decimal_7 {
     type: number
-    sql: ${customer_revenue} / ${total};;
+    sql: ${total} / ${customer_revenue}  ;;
     hidden: yes
   }
 
   measure: percent_of_total_revenue_decimal_8 {
     type: number
-    sql: ${customer_revenue} / ${total};;
+    sql: ${total} / ${customer_revenue}  ;;
     hidden: yes
   }
 
   measure: percent_of_total_revenue_decimal_9 {
     type: number
-    sql: ${customer_revenue} / ${total};;
+    sql: ${total} / ${customer_revenue}  ;;
     hidden: yes
   }
 
   measure: percent_of_total_revenue_decimal_10 {
     type: number
-    sql: ${customer_revenue} / ${total};;
+    sql: ${total} / ${customer_revenue}  ;;
     hidden: yes
   }
 
   measure: percent_of_total_revenue_decimal_11 {
     type: number
-    sql: ${customer_revenue} / ${total};;
+    sql: ${total} / ${customer_revenue}  ;;
     hidden: yes
   }
 
   measure: percent_of_total_revenue_decimal_12 {
     type: number
-    sql: ${customer_revenue} / ${total};;
+    sql: ${total} / ${customer_revenue}  ;;
     hidden: yes
   }
 
@@ -279,9 +287,9 @@ view: users {
     WHEN {% parameter decimal_selector %} = '7' THEN CAST(ROUND(${percent_of_total_revenue_decimal_7}, 7) AS DECIMAL(10,7))
     WHEN {% parameter decimal_selector %} = '8' THEN CAST(ROUND(${percent_of_total_revenue_decimal_8}, 8) AS DECIMAL(10,8))
     WHEN {% parameter decimal_selector %} = '9' THEN CAST(ROUND(${percent_of_total_revenue_decimal_9}, 9) AS DECIMAL(10,9))
-    WHEN {% parameter decimal_selector %} = '10' THEN CAST(ROUND(${percent_of_total_revenue_decimal_10}, 10) AS DECIMAL(10,10))
-    WHEN {% parameter decimal_selector %} = '11' THEN CAST(ROUND(${percent_of_total_revenue_decimal_11}, 11) AS DECIMAL(10,11))
-    WHEN {% parameter decimal_selector %} = '12' THEN CAST(ROUND(${percent_of_total_revenue_decimal_12}, 12) AS DECIMAL(10,12))
+    WHEN {% parameter decimal_selector %} = '10' THEN CAST(ROUND(${percent_of_total_revenue_decimal_10}, 10) AS DECIMAL(12,10))
+    WHEN {% parameter decimal_selector %} = '11' THEN CAST(ROUND(${percent_of_total_revenue_decimal_11}, 11) AS DECIMAL(12,11))
+    WHEN {% parameter decimal_selector %} = '12' THEN CAST(ROUND(${percent_of_total_revenue_decimal_12}, 12) AS DECIMAL(12,12))
 
     END;;
   }
@@ -295,8 +303,6 @@ view: users {
       last_name,
       events.count,
       orders.count,
-      saralooker.count,
-      sindhu.count,
       user_data.count
     ]
   }
