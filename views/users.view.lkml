@@ -277,6 +277,9 @@ view: users {
 
   measure: percent_of_total_revenue {
     type: string
+    html: <div style="border: 2px solid #your-border-color; border-radius: your-border-radius;">
+    Your Content Here
+    </div>
     sql: CASE
     WHEN {% parameter decimal_selector %} = '1' THEN CAST(ROUND(${percent_of_total_revenue_decimal_1}, 1) AS DECIMAL(10,1))
     WHEN {% parameter decimal_selector %} = '2' THEN CAST(ROUND(${percent_of_total_revenue_decimal_2}, 2) AS DECIMAL(10,2))
@@ -290,9 +293,7 @@ view: users {
     WHEN {% parameter decimal_selector %} = '10' THEN CAST(ROUND(${percent_of_total_revenue_decimal_10}, 10) AS DECIMAL(12,10))
     WHEN {% parameter decimal_selector %} = '11' THEN CAST(ROUND(${percent_of_total_revenue_decimal_11}, 11) AS DECIMAL(12,11))
     WHEN {% parameter decimal_selector %} = '12' THEN CAST(ROUND(${percent_of_total_revenue_decimal_12}, 12) AS DECIMAL(12,12))
-    html: <div style="border: 2px solid #your-border-color; border-radius: your-border-radius;">
-    Your Content Here
-    </div>
+
     END;;
 
   }
